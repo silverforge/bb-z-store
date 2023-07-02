@@ -1,5 +1,6 @@
 import { Draft, produce } from "immer";
 import { StateCreator, create } from "zustand";
+import { v4 as uuidv4 } from 'uuid';
 
 type SetState<T> = (stateRecipeFunc: (state: Draft<T>) => void) => void;
 
@@ -45,7 +46,7 @@ const useMyBookStore = createZedStore<BookState>((set, get) => ({
   fillBookData: (bookData: Partial<BookState>) => {
     set(draft => {
       draft.archived = false;
-      draft.id = crypto.randomUUID();
+      draft.id = uuidv4();
       // @ts-ignore
       Object.keys(bookData).forEach(k => draft[k] = bookData[k]);
     });

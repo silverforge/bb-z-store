@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { produce } from 'immer';
+import { v4 as uuidv4 } from 'uuid';
 
 type PreparedBook = {
   id: string;
@@ -30,7 +31,7 @@ const useMyBookStore = create<BookState>((set, get) => ({
   fillBookData: (bookData: Partial<BookState>) => {
     set(produce<BookState>(draft => {
       draft.archived = false;
-      draft.id = crypto.randomUUID();
+      draft.id = uuidv4();
       // @ts-ignore
       Object.keys(bookData).forEach(k => draft[k] = bookData[k]);
     }));

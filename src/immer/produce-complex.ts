@@ -4,6 +4,9 @@ type Book = {
   title: string;
   publisher: {
     name: string;
+    copyright: {
+      name: string;
+    }
   }
   authors: {
     firstName: string;
@@ -15,7 +18,10 @@ type Book = {
 const theBookMakesYouCry: Book = {
   title: 'Data Structures and Algorithms in Java (2nd edition)',
   publisher: {
-    name: 'Blue Algae'
+    name: 'Blue Algae',
+    copyright: {
+      name: 'Anna Frank'
+    }
   },
   authors: [{ firstName: 'Martin', lastName: 'Drummer' }, { firstName: 'Kim', lastName: 'Yu-son' }],
   price: 53.38,
@@ -27,6 +33,7 @@ copyOfTheBookMakesYouCry.publisher.name = 'Red Ant';
 
 const newTheBookMakesYouCry = produce<Book>(theBookMakesYouCry, draft => {
   // draft.publisher.name = 'Green Lemon';
+  // draft.publisher.copyright.name = 'Otto Frank';
   draft.authors.push({ firstName: 'Caoimhe', lastName: 'Duggan' });
   draft.price = 67.99;
 });
